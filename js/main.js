@@ -1,16 +1,36 @@
 class GeradorRandom{
     constructor(){
-        this.max = 10;
+        this.alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
+    voucher = "";
+
     getRandomInt() {
-        return Math.floor(Math.random() * this.max);
+        return this.voucher += Math.floor(Math.random() * 10).toString();
+    }
+    getRandomLetter(){
+        let index = Math.floor(Math.random() * this.alpha.length);
+        return this.voucher += this.alpha[index];
+    }
+    generateVoucher(){
+        for(let i=0; i<7; ++i){
+            switch (Math.floor(Math.random() * 2)) {                
+                case 0:
+                    this.getRandomInt();
+                break;
+                case 1:
+                    this.getRandomLetter();
+                break;
+                default:
+                    break;
+            }
+        }
+        return this.voucher;
     }
 }
 
-function gerarint(){
+function gerarVoucher(){
     const gerador = new GeradorRandom();
-    var numRandom = gerador.getRandomInt(10);
+    let voucherGerado = gerador.generateVoucher();
 
-    document.getElementById('resultado').value = numRandom;
-    
+    document.getElementById('resultado').value = voucherGerado;
 }
